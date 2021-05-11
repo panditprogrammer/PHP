@@ -33,7 +33,7 @@ echo array_search('mobile',$obj);
 echo "<br> ";
 echo array_search('2',$arr1);
 
-// changing value in array 
+// changing value in array replace function
 echo "<br> array replace value";
 
 $new_arr1 = array_replace($arr1,$obj);
