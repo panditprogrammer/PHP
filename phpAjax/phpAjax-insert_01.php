@@ -14,6 +14,25 @@
 
     <!-- bootstrap  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        #alert {
+            display: none;
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 1rem;
+            border-radius: 0.2rem;
+            font-weight: bold;
+
+        }
+
+        #alert:hover{
+            right: auto;
+        }
+        
+    </style>
 
 </head>
 
@@ -84,12 +103,13 @@
                             fetchData();
                             $("#insertForm").trigger("reset");
                             $("#alert").html("Inserted successfully!").slideDown().removeClass("alert-danger").addClass("alert-success py-2");
-                        } else
+                        } else {
                             $("#alert").html("Unabel to insert!").slideDown().addClass("alert-danger py-2");
+                        }
                     }
                 })
             }
-
+            hideAlert();
         });
 
         function fetchData() {
@@ -101,6 +121,40 @@
                 }
             });
         }
+
+        function hideAlert() {
+            setTimeout(() => {
+                $("#alert").slideUp();
+            }, 7000);
+        }
+
+        // fetch id for delete record
+        $(document).on("click", ".deleteBtn", function() {
+
+            if (confirm("Do you want to delete this record?")) {
+                var Id = $(this).data("id");
+                var thisElement = this;
+
+                $.ajax({
+                    url: "phpAjax-delete_02.php",
+                    type: "POST",
+                    data: {
+                        id: Id
+                    },
+                    success: (data) => {
+
+                        if (data == "1") {
+                            $(thisElement).closest("tr").fadeOut();
+                            $("#alert").html("Deleted Successfully!").slideDown().removeClass("alert-danger").addClass("alert-success py-2");
+                        } else {
+                            $("#alert").html("Unabel to Delete Record!").slideDown().addClass("alert-danger py-2");
+                        }
+                    }
+                })
+                hideAlert();
+
+            }
+        });
 
     });
 </script>

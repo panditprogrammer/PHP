@@ -10,10 +10,11 @@ if (mysqli_num_rows($result) > 0) {
     $dataTable = ' <table class="table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
+            <th width="100px" scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Age</th>
             <th scope="col">Gender</th>
+            <th width="100px" scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>';
@@ -23,6 +24,7 @@ if (mysqli_num_rows($result) > 0) {
                         <td>' . $row["name"] . '</td>
                         <td>' . $row["age"] . '</td>
                         <td>' . $row["gender"] . '</td>
+                        <td> <button class="btn btn-sm btn-danger deleteBtn" data-id="' . $row["id"] . '"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>';
     }
 
