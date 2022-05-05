@@ -18,9 +18,7 @@
 </head>
 
 <body>
-    <div class="container mb-4 text-center bg-success text-white py-2">
-        <h1>PHP & Ajax</h1>
-    </div>
+<?php require_once "navbar.php"; ?>
 
     <section class="container">
         <div class="row">

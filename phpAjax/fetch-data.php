@@ -13,6 +13,7 @@ if (mysqli_num_rows($result) > 0) {
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Age</th>
+            <th scope="col">Gender</th>
         </tr>
     </thead>
     <tbody>';
@@ -21,6 +22,7 @@ if (mysqli_num_rows($result) > 0) {
                         <td>' . $row["id"] . '</td>
                         <td>' . $row["name"] . '</td>
                         <td>' . $row["age"] . '</td>
+                        <td>' . $row["gender"] . '</td>
                     </tr>';
     }
 
