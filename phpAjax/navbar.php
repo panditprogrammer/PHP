@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col">
             <a class="btn-sm btn bg-white" href="phpAjax-fetch_00.php">fetch Data</a>
+            <a class="btn-sm btn bg-white" href="phpAjax-pagination_05.php">pagination</a>
             <a class="btn-sm btn bg-white" href="phpAjax-insert_01.php">Insert Data</a>
         </div>
     </div>
