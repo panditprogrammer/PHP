@@ -1,13 +1,18 @@
 <?php
 require_once "conn.php";
 
-$sql = "SELECT * FROM phpajaxtable";
+if (isset($_POST["search"])) {
 
-$result = mysqli_query($conn, $sql) or die("SQL query failed!");
+    $search_query = $_POST["search"];
 
-$dataTable = "";
-if (mysqli_num_rows($result) > 0) {
-    $dataTable = ' <table class="table">
+
+    $sql = "SELECT * FROM phpajaxtable WHERE name LIKE '%{$search_query}%' OR age LIKE '%{$search_query}%' OR gender LIKE '%{$search_query}%'";
+
+    $result = mysqli_query($conn, $sql) or die("SQL query failed!");
+
+    $dataTable = "";
+    if (mysqli_num_rows($result) > 0) {
+        $dataTable = ' <table class="table">
     <thead>
         <tr>
             <th width="100px" scope="col">ID</th>
@@ -19,8 +24,8 @@ if (mysqli_num_rows($result) > 0) {
         </tr>
     </thead>
     <tbody>';
-    while ($row = mysqli_fetch_assoc($result)) {
-        $dataTable .= '<tr>
+        while ($row = mysqli_fetch_assoc($result)) {
+            $dataTable .= '<tr>
                         <td>' . $row["id"] . '</td>
                         <td>' . $row["name"] . '</td>
                         <td>' . $row["age"] . '</td>
@@ -28,15 +33,15 @@ if (mysqli_num_rows($result) > 0) {
                         <td> <button class="btn btn-sm btn-secondary editBtn" data-editid="' . $row["id"] . '"><i class="fa-solid fa-edit"></i></button></td>
                         <td> <button class="btn btn-sm btn-danger deleteBtn" data-id="' . $row["id"] . '"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>';
-    }
+        }
 
-    $dataTable .= ' </tbody>
+        $dataTable .= ' </tbody>
                 </table>';
 
 
-    mysqli_close($conn);
-    echo $dataTable;
-
-} else {
-    echo "<h2>Record Not Found</h2>";
+        mysqli_close($conn);
+        echo $dataTable;
+    } else {
+        echo "<h2>Record Not Found</h2>";
+    }
 }
