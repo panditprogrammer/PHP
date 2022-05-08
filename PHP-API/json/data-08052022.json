@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "name": "Anjali Kumari",
+        "age": "12",
+        "gender": "female"
+    },
+    {
+        "id": "2",
+        "name": "Rahul kumar",
+        "age": "17",
+        "gender": "male"
+    },
+    {
+        "id": "3",
+        "name": "prity",
+        "age": "5",
+        "gender": "female"
+    },
+    {
+        "id": "4",
+        "name": "shubham",
+        "age": "14",
+        "gender": "male"
+    },
+    {
+        "id": "5",
+        "name": "sonu",
+        "age": "22",
+        "gender": "male"
+    },
+    {
+        "id": "6",
+        "name": "don",
+        "age": "12",
+        "gender": "male"
+    },
+    {
+        "id": "7",
+        "name": "sunny",
+        "age": "9",
+        "gender": "male"
+    }
+]

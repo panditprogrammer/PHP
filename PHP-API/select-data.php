@@ -14,6 +14,7 @@ if (mysqli_num_rows($result) > 0) {
     $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
     // echo "<pre>";
     // print_r($data);
+    $json_data = json_encode($data);
+    echo $json_data;
 
-    echo json_encode($data);
 }

@@ -88,3 +88,14 @@
 </script>
 
 </html>
+<!-- <h2>Fetch data using php json_decode</h2> -->
+<?php 
+// fetch json file data using php 
+$file = "data.json"; // json file path
+$jsonData = file_get_contents($file);
+$array_data = json_decode($jsonData,true);
+
+// echo "<pre>";
+// print_r($array_data);
+
+?>
