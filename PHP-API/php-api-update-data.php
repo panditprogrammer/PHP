@@ -1,6 +1,6 @@
 <?php
 // This is api file to update data data in database  
-// POST Request API Example
+// PUT Request API Example
 require_once "config.php";
 
 // important setting for API 
