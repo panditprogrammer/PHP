@@ -1,7 +1,7 @@
 <?php
 require_once "conn.php";
 
-$sql = "SELECT * FROM phpajaxtable";
+$sql = "SELECT * FROM phpajaxtab";
 
 $result = mysqli_query($conn, $sql) or die("SQL query failed!");
 

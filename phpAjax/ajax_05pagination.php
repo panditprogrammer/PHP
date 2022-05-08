@@ -13,7 +13,7 @@ if(isset($_POST["pageNo"])){
 
 $offset  = ($page -1) * $limit;
 
-$sql = "SELECT * FROM phpajaxtable LIMIT $offset, $limit";
+$sql = "SELECT * FROM phpajaxtab LIMIT $offset, $limit";
 $result = mysqli_query($conn, $sql) or die("SQL query failed");
 $html = "";
 
@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
     </table>
     <div id="pagination" class="btns my-2">';
 
-    $sql_num_rows = "SELECT * FROM phpajaxtable";
+    $sql_num_rows = "SELECT * FROM phpajaxtab";
     $result_rows = mysqli_query($conn,$sql_num_rows) or die("SQL query failed!");
     $total_records = mysqli_num_rows($result_rows);
     $total_pages = ceil($total_records/$limit);
