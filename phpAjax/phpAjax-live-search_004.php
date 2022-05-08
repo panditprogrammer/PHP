@@ -6,7 +6,7 @@ if (isset($_POST["search"])) {
     $search_query = $_POST["search"];
 
 
-    $sql = "SELECT * FROM phpajaxtable WHERE name LIKE '%{$search_query}%' OR age LIKE '%{$search_query}%' OR gender LIKE '%{$search_query}%'";
+    $sql = "SELECT * FROM phpajaxtab WHERE name LIKE '%{$search_query}%' OR age LIKE '%{$search_query}%' OR gender LIKE '%{$search_query}%'";
 
     $result = mysqli_query($conn, $sql) or die("SQL query failed!");
 

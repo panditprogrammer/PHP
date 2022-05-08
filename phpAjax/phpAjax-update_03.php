@@ -5,7 +5,7 @@ if (isset($_POST["id"])) {
 
     $id = $_POST["id"];
 
-    $sql = "SELECT * FROM phpajaxtable WHERE id = '$id'";
+    $sql = "SELECT * FROM phpajaxtab WHERE id = '$id'";
     $result = mysqli_query($conn, $sql);
 
     $data = "";
@@ -54,7 +54,7 @@ if (isset($_POST["name"]) && isset($_POST["age"]) && isset($_POST["gender"]) && 
     $uid = $_POST["uid"];
 
     if (strlen(trim($name)) != 0 && strlen(trim($age)) != 0 && strlen(trim($gender)) != 0) {
-        $sql = "UPDATE  phpajaxtable SET name ='$name', age='$age', gender='$gender' WHERE id = '$uid'";
+        $sql = "UPDATE  phpajaxtab SET name ='$name', age='$age', gender='$gender' WHERE id = '$uid'";
 
         if (mysqli_query($conn, $sql)) {
             echo "1";
