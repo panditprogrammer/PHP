@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API php - Ajax </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/phpAjax/css/style.css">
+</head>
+
+<body>
+
+    <!-- edit form model  -->
+    <div id="editModel">
+        <div class="formdiv">
+            <form id="updateForm" class="row"><span id="closeBtn"><i class="fa-solid fa-xmark"></i></span>
+                <h2>Edit Record</h2>
+                <div class="col-md-12 my-2">
+                    <input type="text" class="form-control" id="username" placeholder="First name">
+                    <input type="hidden" id="userid">
+                </div>
+                <div class="col-md-12 my-2">
+                    <input type="number" min="14" class="form-control" id="userage" placeholder="Age">
+                </div>
+                <div class="col-md-12 my-2">
+                    <select class="form-select" id="usergender">
+                        <option selected disabled="">Select Gender</option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                        <option value="other">other</option>
+                    </select>
+                </div>
+                <div class="col-md-6 my-2 mt-4">
+                    <button id="updateBtn" class="btn btn-success">Update Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Fetch api in jquery</h2>
+    </div>
+    <div class="container">
+        <section class="my-4">
+            <table id="table" class="table">
+                <!-- api data goes here  -->
+            </table>
+        </section>
+
+
+    </div>
+</body>
+<!-- jquery  -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(() => {
+
+        // close the form model 
+        $(document).on("click", "#closeBtn", function() {
+            $("#editModel").hide(500);
+        })
+
+        fetchData();
+
+        // fetch API data  
+        function fetchData() {
+            var url = "http://localhost/PHP-API/php-api-fetch_all.php"
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(data) {
+
+                    var html = `  <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>age</th>
+                        <th>gender</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+                    for (let i = 0; i < data.length; i++) {
+                        const element = data[i];
+                        html += `<tr>
+                                <td>${element.id}</td>
+                                <td>${element.name}</td>
+                                <td>${element.age}</td>
+                                <td>${element.gender}</td>
+                                <td><button class="btn btn-sm editBtn bg-warning" data-eid="${element.id}">Edit</button></td>
+                                <td><button class="btn btn-sm bg-danger" data-did="${element.id}">Delete</button></td>
+                            </tr>`;
+
+                    }
+                    html += `<tbody>`;
+                    console.log(html);
+                    $("#table").html(html);
+                }
+            })
+
+        }
+
+        // Get the data from API for update and show the model 
+        $(document).on("click", ".editBtn", function() {
+            // show form model 
+            $("#editModel").show(500);
+            var Id = $(this).data("eid");
+            var dataJson = {
+                myId: Id
+            };
+            var json_send = JSON.stringify(dataJson);
+
+            var url = "http://localhost/PHP-API/php-api-fetch_single.php";
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: json_send,
+                success: function(data) {
+                    $("#userid").val(data[0].id);
+                    $("#username").val(data[0].name);
+                    $("#userage").val(data[0].age);
+                    $("#usergender").val(data[0].gender);
+                }
+            })
+
+        });
+
+
+        // update btn click - update the data in database using api
+        $(document).on("click", "#updateBtn", function(e) {
+            e.preventDefault();
+            var Name = $("#username").val();
+            var Age = $("#userage").val();
+            var Gender = $("#usergender").val();
+            var uid = $("#userid").val();
+
+            var dataJson = {
+                userid: uid,
+                username: Name,
+                userage: Age,
+                usergender: Gender
+            };
+            let json_send = JSON.stringify(dataJson);
+
+            if (Name.trim() === "" || Age.trim() === "" || Gender.trim() === "") {
+                $("#alert").html("Fill the required fields!").slideDown().addClass("alert-danger py-2");
+            } else {
+
+                url = "http://localhost/PHP-API/php-api-update-data.php";
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    data: json_send,
+                    success: function(data) {
+                        if (data.status) {
+                            fetchData();
+                            $("#editModel").hide(500);
+
+                        } else {
+                            alert("Unable to update!");
+                        }
+                    }
+                })
+            }
+        })
+
+
+    })
+</script>
+
+</html>
