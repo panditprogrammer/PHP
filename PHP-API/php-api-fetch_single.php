@@ -7,6 +7,7 @@ require_once "config.php";
 // important setting for API 
 header('Content-Type: application/json');// response type 
 header('Access-Control-Allow-Origin: *');  // allow for all websites
+header('Access-Control-Allow-Methods:POST ');  // allow for all websites
 // get the data from request 
 $requestData = json_decode(file_get_contents("php://input"),true);
 $myId = $requestData["myId"];  // get the value
