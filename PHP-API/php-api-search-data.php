@@ -18,7 +18,7 @@ if (empty(trim($search))) {
     echo json_encode(array("message" => "Record Not Found - You need to provide data!", "status" => false)); // response 
 } else {
 
-    $sql = "SELECT * FROM phpajaxtab WHERE name LIKE '%$search%'";
+    $sql = "SELECT * FROM phpajaxtab WHERE name LIKE '%$search%' OR age LIKE '%$search%'";
 
     $result = mysqli_query($conn, $sql);
 
